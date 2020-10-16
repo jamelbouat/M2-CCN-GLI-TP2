@@ -1,7 +1,31 @@
+
 <label>
-  <input type="text" [(ngModel)]="id">
+  <input type="text" [(ngModel)]="selectedPokemonId" readonly>
 </label>
-<div>
-  {{ id }}
+
+<label>
+  <input type="text" [(ngModel)]="searchField" placeholder="search a pokemon">
+</label>
+
+<label>
+    <select ngModel (ngModelChange)="getPokemon($event)">
+        <option value="" disabled selected hidden>Select a pokemon...</option>
+        <option *ngFor="let pokemon of pokemons |
+                filterPokemonPipe : 'name' : searchField"
+                [ngValue]="pokemon" >
+            {{ pokemon.name }}
+        </option>
+    </select>
+</label>
+
+<div *ngIf="(pokemons | filterPokemonPipe : 'name' : searchField).length === 0" class = "alert-div">
+    No pokemon found !
 </div>
 
+<div class = "text-div">
+    Pokemon id : {{ selectedPokemonId }}
+</div>
+
+<div class = "text-div">
+    Pokemon name : {{ selectedPokemonName }}
+</div>
