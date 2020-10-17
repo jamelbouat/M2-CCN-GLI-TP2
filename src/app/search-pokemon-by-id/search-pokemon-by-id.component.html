@@ -8,7 +8,7 @@
 </label>
 
 <label>
-    <select ngModel (ngModelChange)="getPokemon($event)">
+    <select ngModel (ngModelChange)="pokemonSelected($event)">
         <option value="" disabled selected hidden>Select a pokemon...</option>
         <option *ngFor="let pokemon of pokemons |
                 filterPokemonPipe : 'name' : searchField"
@@ -17,6 +17,8 @@
         </option>
     </select>
 </label>
+
+<button (click)="goPokemon()" class = "button-div">Go Pokemon</button>
 
 <div *ngIf="(pokemons | filterPokemonPipe : 'name' : searchField).length === 0" class = "alert-div">
     No pokemon found !

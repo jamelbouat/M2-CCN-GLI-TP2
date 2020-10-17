@@ -25,9 +25,13 @@ export class SearchPokemonByIdComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    getPokemon(pokemon: Pokemon): void {
+    pokemonSelected(pokemon: Pokemon): void {
         console.log(pokemon);
         this.selectedPokemonId = pokemon.id;
         this.selectedPokemonName = pokemon.name;
+    }
+
+    goPokemon(): any {
+        console.log(this.selectedPokemonId);
     }
 }

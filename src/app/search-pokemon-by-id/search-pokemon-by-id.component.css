@@ -10,10 +10,13 @@ select, input {
     font-size: 30px;
 }
 
-
 .alert-div {
     margin-left: 250px;
     margin-top: 20px;
     color: red;
 }
 
+.button-div {
+    margin-left: 10px;
+    font-size: 20px;
+}
