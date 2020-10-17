@@ -1,18 +1,18 @@
 
 <label>
-  <input type="text" [(ngModel)]="selectedPokemonId" readonly>
+    <input type="text" [(ngModel)]="selectedPokemonId" readonly>
 </label>
 
 <label>
-  <input type="text" [(ngModel)]="searchField" placeholder="search a pokemon">
+    <input type="text" [(ngModel)]="searchField" placeholder="search a pokemon">
 </label>
 
 <label>
-    <select ngModel (ngModelChange)="pokemonSelected($event)">
+    <select [(ngModel)]="selectedPokemonId">
         <option value="" disabled selected hidden>Select a pokemon...</option>
         <option *ngFor="let pokemon of pokemons |
                 filterPokemonPipe : 'name' : searchField"
-                [ngValue]="pokemon" >
+                [value]="pokemon.id" >
             {{ pokemon.name }}
         </option>
     </select>
@@ -28,6 +28,6 @@
     Pokemon id : {{ selectedPokemonId }}
 </div>
 
-<div class = "text-div">
-    Pokemon name : {{ selectedPokemonName }}
+<div class = "text-div" *ngIf="pokemonDetails">
+    <app-pokemon-detail [details]="pokemonDetails"></app-pokemon-detail>
 </div>
