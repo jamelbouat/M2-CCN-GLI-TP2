@@ -17,13 +17,9 @@ export class PokemonAPIServiceService {
 
     getPokemons(): Observable<PokemonServiceResult> {
         return this.http.get<PokemonServiceResult>(url);
-            // .subscribe(data =>
-            // console.log(data));
     }
 
     getPokemonDetails(id: string): Observable<PokemonDetails> {
         return this.http.get<PokemonDetails>(url + id + '/');
-        // .subscribe(data =>
-        // console.log(data));
     }
 }
