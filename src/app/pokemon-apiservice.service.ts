@@ -20,6 +20,6 @@ export class PokemonAPIServiceService {
     }
 
     getPokemonDetails(id: string): Observable<PokemonDetails> {
-        return this.http.get<PokemonDetails>(url + id + '/');
+        return this.http.get<PokemonDetails>(url + id);
     }
 }

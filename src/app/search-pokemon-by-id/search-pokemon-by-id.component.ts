@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Pokemon, PokemonDetails} from '../pokemon';
 import {PokemonAPIServiceService} from '../pokemon-apiservice.service';
+import {PokemonShareInformationService} from '../pokemon-share-information.service';
 
 @Component({
     selector: 'app-search-pokemon-by-id',
@@ -12,16 +13,17 @@ import {PokemonAPIServiceService} from '../pokemon-apiservice.service';
 export class SearchPokemonByIdComponent implements OnInit {
     pokemonDetails: PokemonDetails;
     selectedPokemonId;
-    searchField = '';
+    searchField: string;
 
-    constructor(private pokemonService: PokemonAPIServiceService) {
+    constructor(private pokemonService: PokemonAPIServiceService,
+                private pokemonShareInformationService: PokemonShareInformationService) {
     }
 
-    pokemons: Pokemon[] = [
-    ];
+    pokemons: Pokemon[] = undefined ;
 
-    async ngOnInit(): Promise<void> {
-        (await this.pokemonService.getPokemons()).subscribe(data => {
+    ngOnInit(): void {
+        this.pokemons = [];
+        this.pokemonService.getPokemons().subscribe(data => {
             data.results.forEach((pokemon, index) => {
                 this.pokemons.push(new Pokemon(index.toString(), pokemon.name));
             });
@@ -30,8 +32,10 @@ export class SearchPokemonByIdComponent implements OnInit {
 
     goPokemon(): any {
         if (this.selectedPokemonId !== '') {
-            this.pokemonService.getPokemonDetails(this.selectedPokemonId)
+            this.pokemonService.getPokemonDetails((+ this.selectedPokemonId + 1).toString()) // there is no pokemon with index 0
                 .subscribe(data => this.pokemonDetails = data);
         }
+
+        this.pokemonShareInformationService.setValue(this.selectedPokemonId);
     }
 }

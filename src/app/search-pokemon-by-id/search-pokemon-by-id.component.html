@@ -1,6 +1,6 @@
 
 <label>
-    <input type="text" [(ngModel)]="selectedPokemonId" readonly>
+    <input type="text" [(ngModel)]="selectedPokemonId" readonly placeholder="Pokemon id">
 </label>
 
 <label>
@@ -9,7 +9,6 @@
 
 <label>
     <select [(ngModel)]="selectedPokemonId">
-        <option value="" disabled selected hidden>Select a pokemon...</option>
         <option *ngFor="let pokemon of pokemons |
                 filterPokemonPipe : 'name' : searchField"
                 [value]="pokemon.id" >
@@ -24,7 +23,7 @@
     No pokemon found !
 </div>
 
-<div class = "text-div">
+<div class = "text-div" *ngIf="selectedPokemonId">
     Pokemon id : {{ selectedPokemonId }}
 </div>
 
